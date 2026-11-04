@@ -15,10 +15,14 @@ export default function BugEffectLoop() {
 
   useEffect(() => {
     setCount(count + 1);
-  });
+  }, []);
 
   return <p>Bug 1 Count: {count}</p>;
 }
 
-// Explanation:
-// (Write your explanation here)
+/*
+Explanation:
+(The problem was the useEffect was running every time the component rendered.
+Since it was updating the count, it caused another render and repeated the process.
+I added an empty dependency array ([]) so the effect only runs once when the component loads.)
+*/
