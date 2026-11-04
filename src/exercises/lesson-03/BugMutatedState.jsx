@@ -9,12 +9,12 @@
 */
 
 import { useState } from 'react';
+
 export default function BugMutatedState() {
   let [count, setCount] = useState(0);
 
   function handleAdd() {
-    count++;
-    setCount(count);
+    setCount((previousCount) => previousCount + 1);
   }
 
   return (
@@ -25,5 +25,10 @@ export default function BugMutatedState() {
   );
 }
 
-// Explanation:
-// (Write your explanation here)
+/*
+Explanation:
+(The problem was that the count was being change directly with count++.
+React doesn't detect direct changes to state, so the component didn't update.
+I fixed it by using setCount, which update the state correctly and makes
+React re-render the component.)
+*/
