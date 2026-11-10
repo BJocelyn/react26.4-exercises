@@ -7,9 +7,13 @@ export default function BugStrictMode() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    setInterval(() => {
+    const intervalId = setInterval(() => {
       setCount((c) => c + 1);
     }, 1000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
 
   return (
@@ -21,3 +25,7 @@ export default function BugStrictMode() {
 }
 
 // Write your explanation of how StrictMode helps us catch this bug
+// StrictMode runs an extra setup and cleanup cycle for effects
+// during development. The cleanup function clears the previous
+// interval before another one is created. This prevents duplicate
+// intervals and ensures the counter increments by one.
