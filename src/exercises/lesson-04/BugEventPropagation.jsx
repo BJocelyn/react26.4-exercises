@@ -6,13 +6,16 @@ export default function BugEventPropagation() {
     alert("RED BOX CLICKED ❌ Don't show me!");
   }
 
-  function handleInnerClick() {
+  function handleInnerClick(event) {
+    event.stopPropagation();
+
     alert('Button Clicked ✅');
   }
 
   return (
     <>
       <h2>Stopping Event Propagation</h2>
+
       <div
         style={{ padding: 20, border: '2px solid red' }}
         onClick={handleOuterClick}
@@ -22,3 +25,8 @@ export default function BugEventPropagation() {
     </>
   );
 }
+
+// Explanation:
+// Event bubbling allows a click event to travel from a child
+// element to its parent. stopPropagation() prevents the button's
+// click event from reaching the parent div.
